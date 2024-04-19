@@ -1,12 +1,24 @@
 <template>
     <div id="left-nav">
         <fieldset>
-            <h2>Score: <span id="score-span">000000</span></h2>
+            <h2>Score: <span id="score-span">{{ scoreString }}</span></h2>
         </fieldset>
     </div>
 </template>
 
 <script setup lang="ts">
+import { ref, watch } from 'vue';
+import type { Ref } from 'vue';
+import calculateScore from '../modules/calculateScore';
+const props = defineProps<{ score: number }>()
+
+const scoreString: Ref<string> = ref('000000');
+
+watch(() => props.score, () => {
+    if (props.score > 0) {
+        scoreString.value = calculateScore(props.score)
+    }
+})
 </script>
 
 <style scoped>

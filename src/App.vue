@@ -3,7 +3,7 @@
         <GameOverBanner :isGameOver="AppState.gameOverState" />
         <ComboBanner />
 
-        <LeftNav />
+        <LeftNav :score="AppState.score" />
 
         <div id="playground">
             <GridBox v-for="boxN in GRID_BOXES_SIZE" :key="boxN" :boxN="boxN"
@@ -85,6 +85,7 @@ const keyHandler = (e: KeyboardEvent) => {
             break;
         default:
             if (AppState.fall) return;
+
             moveDown(AppState);
             // rerenderGrid();
             break;

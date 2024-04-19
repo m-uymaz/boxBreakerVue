@@ -1,14 +1,12 @@
-import AppState from './AppState/AppState.js';
-
-const calculateScore = (): string => {
+const calculateScore = (score: number): string => {
     const zerosArr = ['0', '0', '0', '0', '0', '0'];
-    const appScoreString: string = AppState.score.toString();
+    const appScoreString: string = score.toString();
 
     const scoreToDisplay: string[] = zerosArr.slice(0, zerosArr.length - appScoreString.length);
 
-    const score: string = scoreToDisplay.join('') + appScoreString;
+    const scoreString: string = scoreToDisplay.join('') + appScoreString;
 
-    return score;
+    return scoreString;
 }
 
 export default calculateScore;
