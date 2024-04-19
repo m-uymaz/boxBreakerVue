@@ -6,9 +6,9 @@
         ${isExploding ? 'box-explotion' : ''}
         `" v-bind:style="{
             backgroundColor:
-                isArrow ? coughtBox || ''
+                isArrow ? coughtBox || ALICEBLUE
                     :
-                    rgb || ''
+                    rgb || ALICEBLUE
         }">
     </div>
 </template>
@@ -16,17 +16,16 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import type { Ref } from 'vue';
-import { ExplodedBoxes } from '../types/types';
+import { ALICEBLUE } from '../constants/constants';
 const props = defineProps<{
     rgb: string | null
     isOnArrowIndex: boolean
     isArrow: boolean
     coughtBox: string | null
     boxN: number
-    explodedBoxes: ExplodedBoxes
+    isBlinking: boolean
 }>()
 
-const isBlinking: Ref<boolean> = ref(false);
 const isExploding: Ref<boolean> = ref(false);
 
 </script>
@@ -75,7 +74,7 @@ const isExploding: Ref<boolean> = ref(false);
 }
 
 .soon-to-explode {
-    animation: blinking-box 0.2s linear;
+    animation: blinking-box 0.2s infinite;
 }
 
 @keyframes blinking-box {

@@ -1,5 +1,6 @@
 import { GridLengths, BLINKING } from '../constants/constants.js';
 import { ExplodedBoxes, GridArray, CurrentColor, AppStateInterface } from '../types/types.js';
+import boxPositionN from './boxPositionN.js';
 
 function floodFill(AppState: AppStateInterface, position: { y: number, x: number }) {
     const copyGrid: GridArray = JSON.parse(JSON.stringify(AppState.gridArray));
@@ -12,7 +13,8 @@ function floodFill(AppState: AppStateInterface, position: { y: number, x: number
     if (explodedBoxes.length > 2) {
         explodedBoxes.sort((a, b) => a.y - b.y);
         explodedBoxes.forEach((explodedBox) => {
-            AppState.gridArray[explodedBox.y][explodedBox.x] = BLINKING;
+            // AppState.gridArray[explodedBox.y][explodedBox.x] = BLINKING;
+            AppState.blinkingBoxesN.push(boxPositionN(explodedBox.y, explodedBox.x))
             AppState.checkBoxPositions.push({ y: explodedBox.y, x: explodedBox.x });
             AppState.explodedBoxes.push({ y: explodedBox.y, x: explodedBox.x });
         });

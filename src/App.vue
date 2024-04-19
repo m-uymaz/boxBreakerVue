@@ -10,7 +10,8 @@
                 :rgb="AppState.gridArray[rowIndex(boxN)][colIndex(boxN)]"
                 :isOnArrowIndex="colIndex(boxN) === AppState.arrowIndex ? true : false"
                 :isArrow="colIndex(boxN) === (AppState.arrowIndex) && boxN > LAST_ROW_N_START ? true : false"
-                :coughtBox="AppState.coughtBox || null" :boxN="boxN" :explodedBoxes="AppState.explodedBoxes" />
+                :coughtBox="AppState.coughtBox || null" :boxN="boxN"
+                :isBlinking="AppState.blinkingBoxesN.includes(boxN) ? true : false" />
         </div>
 
         <RightNav @fall-on="fallOn(AppState)" @fall-off="fallOff(AppState)" />
@@ -42,6 +43,7 @@ const AppState: AppStateInterface = reactive({
     },
     checkBoxPositions: [],
     explodedBoxes: [],
+    blinkingBoxesN: [],
     highestPositionY: 1,
     arrowIndex: 5,
     coughtBox: null,
@@ -70,6 +72,7 @@ const keyHandler = (e: KeyboardEvent) => {
                 throwBox(AppState);
                 // rerenderThrowBox();
 
+
                 floodFillChain(AppState.thrownBox!);
             } else {
                 catchBox(AppState);
@@ -93,8 +96,8 @@ async function floodFillChain(position: { y: number, x: number }): Promise<void>
     if (!AppState.explodedBoxes.length) return;
 
     // renderBlinking();
-    await explodeDelay(500);
-    await rerenderDelay(100);
+    // await explodeDelay(500);
+    await fillEmptyGridSpacesDelay(500);
     // renderScore();
 
     AppState.checkBoxPositions.forEach((newPosition) => {
@@ -108,6 +111,22 @@ function clearPrevTimeouts(): void {
 
     AppState.timeouts.rerenderTimeout && clearTimeout(AppState.timeouts.rerenderTimeout);
     AppState.timeouts.rerenderTimeout = null;
+}
+
+function fillEmptyGridSpacesDelay(time: number): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+        try {
+            const timeout = setTimeout(() => {
+                console.log('fillEmptyGridSpaces() rerenderGrid()');
+                fillEmptyGridSpaces(AppState);
+                resolve();
+            }, time);
+
+            AppState.timeouts.rerenderTimeout = timeout;
+        } catch (err) {
+            reject(console.error(err));
+        }
+    });
 }
 
 function explodeDelay(time: number): Promise<void> {
@@ -128,22 +147,6 @@ function explodeDelay(time: number): Promise<void> {
     });
 }
 
-function rerenderDelay(time: number): Promise<void> {
-    return new Promise<void>((resolve, reject) => {
-        try {
-            const timeout = setTimeout(() => {
-                console.log('fillEmptyGridSpaces() rerenderGrid()');
-                fillEmptyGridSpaces(AppState);
-                // rerenderGrid();
-                resolve();
-            }, time);
-
-            AppState.timeouts.rerenderTimeout = timeout;
-        } catch (err) {
-            reject(console.error(err));
-        }
-    });
-}
 </script>
 
 <style scoped>
