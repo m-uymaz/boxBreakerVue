@@ -1,5 +1,6 @@
 <template>
-    <div :tabindex="0" @keydown="keyHandler" id="main">
+    <!--:tabindex="0" @keydown="keyHandler"-->
+    <div id="main">
         <GameOverBanner :isGameOver="AppState.gameOverState" />
         <ComboBanner />
 
@@ -20,8 +21,10 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue';
+import { reactive, onMounted } from 'vue';
 import { GRID_BOXES_SIZE, LAST_ROW_N_START, KeyboardInputs } from './constants/constants.js';
+import { AppStateInterface } from './types/types.js';
+// Modules
 import { generateInitialGrid } from './modules/gridArray';
 import { colIndex, rowIndex } from './modules/findRowColIndex.js';
 import moveArrow from './modules/playerMovement.js';
@@ -30,13 +33,16 @@ import catchBox from './modules/catchBox.js';
 import throwBox from './modules/throwBox.js';
 import { floodFill, fillEmptyGridSpaces } from './modules/floodFillFuncs.js';
 import { fallOn, fallOff } from './modules/fallOptions.js';
-import { AppStateInterface } from './types/types.js';
 // Components
 import GridBox from './components/GridBox.vue';
 import LeftNav from './components/LeftNav.vue';
 import RightNav from './components/RightNav.vue';
 import GameOverBanner from './components/GameOverBanner.vue';
 import ComboBanner from './components/ComboBanner.vue';
+
+onMounted(() => {
+    window.addEventListener('keydown', keyHandler)
+})
 
 const AppState: AppStateInterface = reactive({
     gridArray: generateInitialGrid(),
