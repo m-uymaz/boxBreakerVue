@@ -1,6 +1,5 @@
 const ARROW: string = 'X';
 const ALICEBLUE: string = 'aliceblue';
-const BLINKING: string = 'blinking';
 
 enum KeyboardInputs {
     ArrowLeft = 'ArrowLeft',
