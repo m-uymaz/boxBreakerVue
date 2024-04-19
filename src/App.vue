@@ -106,39 +106,11 @@ async function floodFillChain(position: { y: number, x: number }): Promise<void>
 
     if (!AppState.explodedBoxes.length) return;
 
-    // renderBlinking();
-    // await explodeDelay(500);
-    await fillEmptyGridSpacesDelay(500);
-    // renderScore();
+    await fillEmptyGridSpacesDelay(2000);
+    // await explodeDelay();
 
     AppState.checkBoxPositions.forEach((newPosition) => {
         floodFillChain(newPosition);
-    });
-}
-
-function clearPrevTimeouts(): void {
-    AppState.timeouts.explodeTimeout && clearTimeout(AppState.timeouts.explodeTimeout);
-    AppState.timeouts.explodeTimeout = null;
-
-    AppState.timeouts.rerenderTimeout && clearTimeout(AppState.timeouts.rerenderTimeout);
-    AppState.timeouts.rerenderTimeout = null;
-}
-
-function fillEmptyGridSpacesDelay(time: number): Promise<void> {
-    return new Promise<void>((resolve, reject) => {
-        try {
-            const timeout = setTimeout(() => {
-                fillEmptyGridSpaces(AppState);
-                AppState.explodingBoxesN = AppState.blinkingBoxesN;
-                AppState.blinkingBoxesN = [];
-
-                resolve();
-            }, time);
-
-            AppState.timeouts.rerenderTimeout = timeout;
-        } catch (err) {
-            reject(console.error(err));
-        }
     });
 }
 
@@ -146,10 +118,6 @@ function explodeDelay(time: number): Promise<void> {
     return new Promise<void>((resolve, reject) => {
         try {
             const timeout = setTimeout(() => {
-                console.log('renderExplotions()');
-                AppState.explodedBoxes.forEach((position) => {
-                    // renderExplotions(position);
-                });
                 resolve();
             }, time);
 
@@ -160,6 +128,30 @@ function explodeDelay(time: number): Promise<void> {
     });
 }
 
+function fillEmptyGridSpacesDelay(time: number): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+        try {
+            const timeout = setTimeout(() => {
+                fillEmptyGridSpaces(AppState);
+                AppState.explodingBoxesN = AppState.blinkingBoxesN;
+                AppState.blinkingBoxesN = [];
+                resolve();
+            }, time);
+
+            AppState.timeouts.rerenderTimeout = timeout;
+        } catch (err) {
+            reject(console.error(err));
+        }
+    });
+}
+
+function clearPrevTimeouts(): void {
+    AppState.timeouts.explodeTimeout && clearTimeout(AppState.timeouts.explodeTimeout);
+    AppState.timeouts.explodeTimeout = null;
+
+    AppState.timeouts.rerenderTimeout && clearTimeout(AppState.timeouts.rerenderTimeout);
+    AppState.timeouts.rerenderTimeout = null;
+}
 </script>
 
 <style scoped>
