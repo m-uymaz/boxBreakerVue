@@ -71,29 +71,23 @@ const keyHandler = (e: KeyboardEvent) => {
     switch (e.code) {
         case KeyboardInputs.ArrowLeft:
             moveArrow(AppState, KeyboardInputs.ArrowLeft);
-            // renderArrow(KeyboardInputs.ArrowLeft);
             break;
         case KeyboardInputs.ArrowRight:
             moveArrow(AppState, KeyboardInputs.ArrowRight);
-            // renderArrow(KeyboardInputs.ArrowRight);
             break;
         case KeyboardInputs.Space:
             if (AppState.coughtBox) {
                 throwBox(AppState);
-                // rerenderThrowBox();
-
 
                 floodFillChain(AppState.thrownBox!);
             } else {
                 catchBox(AppState);
-                // rerenderCatchBox();
             }
             break;
         default:
             if (AppState.fall) return;
 
             moveDown(AppState);
-            // rerenderGrid();
             break;
     }
 };
