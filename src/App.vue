@@ -1,7 +1,7 @@
 <template>
     <div :tabindex="0" @keydown="keyHandler" id="main">
         <GameOverBanner :isGameOver="AppState.gameOverState" />
-        <h2 id="combo">Combo <span id="combo-n"></span>!</h2>
+        <ComboBanner />
 
         <LeftNav />
 
@@ -36,6 +36,7 @@ import GridBox from './components/GridBox.vue';
 import LeftNav from './components/LeftNav.vue';
 import RightNav from './components/RightNav.vue';
 import GameOverBanner from './components/GameOverBanner.vue';
+import ComboBanner from './components/ComboBanner.vue';
 
 const AppState: AppStateInterface = reactive({
     gridArray: generateInitialGrid(),
@@ -123,8 +124,6 @@ function fillEmptyGridSpacesDelay(time: number): Promise<void> {
                 fillEmptyGridSpaces(AppState);
                 AppState.explodingBoxesN = AppState.blinkingBoxesN;
                 AppState.blinkingBoxesN = [];
-
-                console.log('Exploding boxes N: ', AppState.explodingBoxesN);
 
                 resolve();
             }, time);
