@@ -46,5 +46,4 @@ export {
     ARROW,
     GRID_BOXES_SIZE,
     LAST_ROW_N_START,
-    BLINKING
 };
