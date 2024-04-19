@@ -100,7 +100,7 @@ async function floodFillChain(position: { y: number, x: number }): Promise<void>
 
     if (!AppState.explodedBoxes.length) return;
 
-    await fillEmptyGridSpacesDelay(2000);
+    await fillEmptyGridSpacesDelay(500);
     // await explodeDelay();
 
     AppState.checkBoxPositions.forEach((newPosition) => {
