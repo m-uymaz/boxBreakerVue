@@ -1,6 +1,6 @@
 <template>
     <div :tabindex="0" @keydown="keyHandler" id="main">
-        <h1 :class="AppState.gameOverState ? 'h1-blinking' : 'h1-none'">GAME OVER</br>!!!</h1>
+        <GameOverBanner :isGameOver="AppState.gameOverState" />
         <h2 id="combo">Combo <span id="combo-n"></span>!</h2>
 
         <LeftNav />
@@ -30,11 +30,12 @@ import catchBox from './modules/catchBox.js';
 import throwBox from './modules/throwBox.js';
 import { floodFill, fillEmptyGridSpaces } from './modules/floodFillFuncs.js';
 import { fallOn, fallOff } from './modules/fallOptions.js';
+import { AppStateInterface } from './types/types.js';
 // Components
 import GridBox from './components/GridBox.vue';
 import LeftNav from './components/LeftNav.vue';
 import RightNav from './components/RightNav.vue';
-import { AppStateInterface } from './types/types.js';
+import GameOverBanner from './components/GameOverBanner.vue';
 
 const AppState: AppStateInterface = reactive({
     gridArray: generateInitialGrid(),
@@ -190,29 +191,5 @@ function explodeDelay(time: number): Promise<void> {
     width: 100%;
     display: flex;
     flex-direction: row;
-}
-
-.h1-blinking {
-    background-color: none;
-    display: block;
-    animation: blink 1s linear infinite;
-    position: absolute;
-    top: 30%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 99;
-
-    font-size: 4em;
-    text-align: center;
-}
-
-.h1-none {
-    display: none;
-}
-
-@keyframes blink {
-    50% {
-        opacity: 0;
-    }
 }
 </style>
