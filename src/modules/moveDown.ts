@@ -7,9 +7,11 @@ import { newLineArray, AppStateInterface } from "../types/types.js";
 const moveDown = (AppState: AppStateInterface): void => {
     if (AppState.gameOverState) return;
 
-    if (AppState.checkBoxPositions.length) AppState.checkBoxPositions.forEach(position => position.y++);
-    if (AppState.explodedBoxes.length) AppState.explodedBoxes.forEach(position => position.y++);
-
+    // THIS DOES NOT SEEM RIGHT!!!!
+    if (AppState.checkBoxPositions.length) AppState.checkBoxPositions.map(position => position.y++);
+    if (AppState.explodedBoxes.length) AppState.explodedBoxes.map(position => position.y++);
+    if (AppState.blinkingBoxesN.length) AppState.blinkingBoxesN = AppState.blinkingBoxesN.map(boxN => boxN += 10);
+    
     const newArray: newLineArray = generateNewLine();
     AppState.gridArray.pop();
     AppState.gridArray.unshift(newArray);

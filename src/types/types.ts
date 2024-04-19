@@ -7,6 +7,7 @@ export type AppStateInterface = {
   checkBoxPositions: ExplodedBoxes;
   explodedBoxes: ExplodedBoxes;
   blinkingBoxesN: number[];
+  explodingBoxesN: number[];
   highestPositionY: number;
   arrowIndex: number;
   coughtBox: string | null;

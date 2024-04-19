@@ -11,7 +11,8 @@
                 :isOnArrowIndex="colIndex(boxN) === AppState.arrowIndex ? true : false"
                 :isArrow="colIndex(boxN) === (AppState.arrowIndex) && boxN > LAST_ROW_N_START ? true : false"
                 :coughtBox="AppState.coughtBox || null" :boxN="boxN"
-                :isBlinking="AppState.blinkingBoxesN.includes(boxN) ? true : false" />
+                :isBlinking="AppState.blinkingBoxesN.includes(boxN) ? true : false"
+                :isExploding="AppState.explodingBoxesN.includes(boxN) ? true : false" />
         </div>
 
         <RightNav @fall-on="fallOn(AppState)" @fall-off="fallOff(AppState)" />
@@ -44,6 +45,7 @@ const AppState: AppStateInterface = reactive({
     checkBoxPositions: [],
     explodedBoxes: [],
     blinkingBoxesN: [],
+    explodingBoxesN: [],
     highestPositionY: 1,
     arrowIndex: 5,
     coughtBox: null,
@@ -117,8 +119,12 @@ function fillEmptyGridSpacesDelay(time: number): Promise<void> {
     return new Promise<void>((resolve, reject) => {
         try {
             const timeout = setTimeout(() => {
-                console.log('fillEmptyGridSpaces() rerenderGrid()');
                 fillEmptyGridSpaces(AppState);
+                AppState.explodingBoxesN = AppState.blinkingBoxesN;
+                AppState.blinkingBoxesN = [];
+
+                console.log('Exploding boxes N: ', AppState.explodingBoxesN);
+
                 resolve();
             }, time);
 

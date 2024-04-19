@@ -14,20 +14,16 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import type { Ref } from 'vue';
 import { ALICEBLUE } from '../constants/constants';
-const props = defineProps<{
+defineProps<{
     rgb: string | null
     isOnArrowIndex: boolean
     isArrow: boolean
     coughtBox: string | null
     boxN: number
     isBlinking: boolean
+    isExploding: boolean
 }>()
-
-const isExploding: Ref<boolean> = ref(false);
-
 </script>
 
 <style scoped>

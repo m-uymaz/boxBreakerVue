@@ -1,4 +1,4 @@
-import { GridLengths, BLINKING } from '../constants/constants.js';
+import { GridLengths } from '../constants/constants.js';
 import { ExplodedBoxes, GridArray, CurrentColor, AppStateInterface } from '../types/types.js';
 import boxPositionN from './boxPositionN.js';
 
