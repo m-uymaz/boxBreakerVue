@@ -1,15 +1,14 @@
 const ARROW: string = 'X';
 const ALICEBLUE: string = 'aliceblue';
 
+const GRID_BOXES_SIZE: number = 200;
+const LAST_ROW_N_START: number = 190;
+
 enum KeyboardInputs {
     ArrowLeft = 'ArrowLeft',
     ArrowRight = 'ArrowRight',
     Space = 'Space'
 }
-
-const GRID_BOXES_SIZE: number = 200;
-
-const LAST_ROW_N_START: number = 190;
 
 enum GridLengths {
     RowLength = 20,
