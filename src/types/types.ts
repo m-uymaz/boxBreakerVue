@@ -30,5 +30,3 @@ export type RandomColor = {
     rgb: string;
     index: number;
 }
-
-export type DivElement = HTMLDivElement | null;
