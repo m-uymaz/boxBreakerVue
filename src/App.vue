@@ -31,7 +31,8 @@ import moveArrow from './modules/playerMovement.js';
 import moveDown from './modules/moveDown.js';
 import catchBox from './modules/catchBox.js';
 import throwBox from './modules/throwBox.js';
-import { floodFill, fillEmptyGridSpaces } from './modules/floodFillFuncs.js';
+import { floodFill } from './modules/floodFillFuncs.js';
+import { fillEmptyGridSpacesDelay, explodeDelay, clearPrevTimeouts } from './modules/timeouts.js';
 import { fallOn, fallOff } from './modules/fallOptions.js';
 // Components
 import GridBox from './components/GridBox.vue';
@@ -94,75 +95,27 @@ const keyHandler = (e: KeyboardEvent) => {
 
 async function floodFillChain(position: { y: number, x: number }): Promise<void> {
     // Flood Fill changes the state instantaniously
-    floodFill(AppState, position);
+    floodFill(AppState, position)
 
-    clearPrevTimeouts();
+    clearPrevTimeouts(AppState)
 
-    if (!AppState.explodedBoxes.length) return;
+    if (!AppState.explodedBoxes.length) return
 
-    await fillEmptyGridSpacesDelay(500);
-    // await explodeDelay();
+    await explodeDelay(AppState, 500)
+    await fillEmptyGridSpacesDelay(AppState, 300)
 
     AppState.checkBoxPositions.forEach((newPosition) => {
-        floodFillChain(newPosition);
-    });
-}
-
-function explodeDelay(time: number): Promise<void> {
-    return new Promise<void>((resolve, reject) => {
-        try {
-            const timeout = setTimeout(() => {
-                resolve();
-            }, time);
-
-            AppState.timeouts.explodeTimeout = timeout;
-        } catch (err) {
-            reject(console.error(err));
-        }
-    });
-}
-
-function fillEmptyGridSpacesDelay(time: number): Promise<void> {
-    return new Promise<void>((resolve, reject) => {
-        try {
-            const timeout = setTimeout(() => {
-                fillEmptyGridSpaces(AppState);
-                AppState.explodingBoxesN = AppState.blinkingBoxesN;
-                AppState.blinkingBoxesN = [];
-                resolve();
-            }, time);
-
-            AppState.timeouts.rerenderTimeout = timeout;
-        } catch (err) {
-            reject(console.error(err));
-        }
-    });
-}
-
-function clearPrevTimeouts(): void {
-    AppState.timeouts.explodeTimeout && clearTimeout(AppState.timeouts.explodeTimeout);
-    AppState.timeouts.explodeTimeout = null;
-
-    AppState.timeouts.rerenderTimeout && clearTimeout(AppState.timeouts.rerenderTimeout);
-    AppState.timeouts.rerenderTimeout = null;
+        floodFillChain(newPosition)
+    })
 }
 </script>
 
 <style scoped>
-#combo {
-    display: none;
-    color: white;
-    font-family: cursive;
-    font-style: italic;
-    font-size: 2em;
-
-    text-align: center;
-
-    position: absolute;
-    top: 30%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 99;
+#main {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
 }
 
 #playground {
@@ -178,10 +131,19 @@ function clearPrevTimeouts(): void {
     background-color: aliceblue;
 }
 
-#main {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
+#combo {
+    display: none;
+    color: white;
+    font-family: cursive;
+    font-style: italic;
+    font-size: 2em;
+
+    text-align: center;
+
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 99;
 }
 </style>

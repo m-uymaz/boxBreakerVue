@@ -13,7 +13,7 @@ function floodFill(AppState: AppStateInterface, position: { y: number, x: number
     if (explodedBoxes.length > 2) {
         explodedBoxes.sort((a, b) => a.y - b.y);
         explodedBoxes.forEach((explodedBox) => {
-            AppState.blinkingBoxesN.push(boxPositionN(explodedBox.y, explodedBox.x))
+            AppState.blinkingBoxesN.push(boxPositionN(explodedBox.y, explodedBox.x));
             AppState.checkBoxPositions.push({ y: explodedBox.y, x: explodedBox.x });
             AppState.explodedBoxes.push({ y: explodedBox.y, x: explodedBox.x });
         });

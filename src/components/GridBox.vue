@@ -55,7 +55,7 @@ defineProps<{
 }
 
 .box-explotion {
-    animation: explotion 0.2s linear;
+    animation: explotion 0.4s linear;
 }
 
 @keyframes explotion {
@@ -64,7 +64,12 @@ defineProps<{
         background-size: contain;
     }
 
+    75% {
+        background-color: aliceblue;
+    }
+
     100% {
+        background-color: aliceblue;
         background-image: none;
     }
 }
