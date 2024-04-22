@@ -131,13 +131,6 @@ async function floodFillChain(position: { y: number, x: number }): Promise<void>
     background-color: aliceblue;
 }
 
-@media (min-width: 576px) and (max-width: 991px) {
-    #playground {
-        max-width: 420px;
-        max-height: 840px;
-    }
-}
-
 #combo {
     display: none;
     color: white;
@@ -152,5 +145,12 @@ async function floodFillChain(position: { y: number, x: number }): Promise<void>
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 99;
+}
+
+@media (min-width: 576px) and (max-width: 991px) {
+    #playground {
+        max-width: 420px;
+        max-height: 840px;
+    }
 }
 </style>

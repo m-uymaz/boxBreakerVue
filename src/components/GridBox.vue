@@ -41,13 +41,11 @@ defineProps<{
 
 @media (min-width: 576px) and (max-width: 991px) {
     .box {
-        border: 1px solid black;
         width: 40px;
         height: 40px;
     }
 
     .box-selected {
-        border: 3px solid black;
         width: 36px;
         height: 36px;
     }
