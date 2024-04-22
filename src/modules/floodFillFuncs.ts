@@ -58,6 +58,8 @@ function fill(copyGrid: GridArray, y: number, x: number, current: CurrentColor, 
 function fillEmptyGridSpaces(AppState: AppStateInterface): void {
     const changedBoxes: ExplodedBoxes = [];
 
+
+    // SCORE IS ADDED HERE!
     AppState.explodedBoxes.forEach(position => {
         AppState.gridArray[position.y][position.x] = null;
         AppState.score += 10;
