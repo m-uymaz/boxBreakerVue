@@ -133,16 +133,8 @@ async function floodFillChain(position: { y: number, x: number }): Promise<void>
 
 @media (min-width: 576px) and (max-width: 991px) {
     #playground {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-
-        position: relative;
-
         max-width: 420px;
         max-height: 840px;
-        border: 1px solid black;
-        background-color: aliceblue;
     }
 }
 
