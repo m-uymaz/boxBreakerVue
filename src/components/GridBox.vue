@@ -6,7 +6,7 @@
         ${isExploding ? 'box-explotion' : ''}
         `" v-bind:style="{
             backgroundColor:
-                isArrow ? coughtBox || ALICEBLUE
+                isArrow ? coughtBoxColor || ALICEBLUE
                     :
                     rgb || ALICEBLUE
         }">
@@ -19,7 +19,7 @@ defineProps<{
     rgb: string | null
     isOnArrowIndex: boolean
     isArrow: boolean
-    coughtBox: string | null
+    coughtBoxColor: string | null
     boxN: number
     isBlinking: boolean
     isExploding: boolean

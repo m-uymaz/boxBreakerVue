@@ -11,7 +11,7 @@
                 :rgb="AppState.gridArray[rowIndex(boxN)][colIndex(boxN)]"
                 :isOnArrowIndex="colIndex(boxN) === AppState.arrowIndex ? true : false"
                 :isArrow="colIndex(boxN) === (AppState.arrowIndex) && boxN > LAST_ROW_N_START ? true : false"
-                :coughtBox="AppState.coughtBox || null"
+                :coughtBoxColor="AppState.coughtBox || null"
                 :isBlinking="AppState.blinkingBoxesN.includes(boxN) ? true : false"
                 :isExploding="AppState.explodingBoxesN.includes(boxN) ? true : false" />
         </div>
