@@ -25,6 +25,22 @@ defineProps<{ isGameOver: boolean }>()
     text-align: center;
 }
 
+@media (min-width: 576px) and (max-width: 991px) {
+    .h1-blinking {
+        background-color: none;
+        display: block;
+        animation: blink 1s linear infinite;
+        position: absolute;
+        top: 30%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 99;
+
+        font-size: 3em;
+        text-align: center;
+    }
+}
+
 @keyframes blink {
     50% {
         opacity: 0;
