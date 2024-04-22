@@ -44,4 +44,16 @@ const fallClickHandler = (event: any) => {
 #fall-option {
     text-align: center;
 }
+
+@media (min-width: 576px) and (max-width: 991px) {
+    #right-nav {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        width: 100%;
+        margin-top: 20px;
+        font-size: 1.0em;
+        color: white;
+    }
+}
 </style>

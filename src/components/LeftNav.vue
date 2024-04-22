@@ -32,4 +32,17 @@ watch(() => props.score, () => {
     font-size: 1.5em;
     color: white;
 }
+
+@media (min-width: 576px) and (max-width: 991px) {
+    #left-nav {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        width: 100%;
+        margin-top: 20px;
+        height: max-content;
+        font-size: 1em;
+        color: white;
+    }
+}
 </style>
