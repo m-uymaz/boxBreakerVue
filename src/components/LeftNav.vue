@@ -33,9 +33,9 @@ watch(() => props.score, () => {
     color: white;
 }
 
-@media (min-width: 576px) and (max-width: 991px) {
+@media (max-height: 900px) {
     #left-nav {
-        font-size: 1em;
+        font-size: 1.3em;
     }
 }
 </style>
